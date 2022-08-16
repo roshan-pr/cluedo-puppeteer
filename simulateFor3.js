@@ -1,17 +1,21 @@
-const { visitPage, login, hostGame, getRoomID } = require('./lib.js');
+const { visitPage, login, hostGame, getRoomId, joinGame } = require('./lib.js');
 
 const url = 'http://localhost:8000';
-const username1 = 'Bani';
-const username2 = 'Praju';
-const username3 = 'Chhavi';
-const numOfPlayers = '4';
+const user1 = 'Bani';
+const user2 = 'Praju';
+const user3 = 'Chhavi';
+const numOfPlayers = '3';
 
-visitPage(url)
-  .then(login(username1))
-  .then(hostGame(numOfPlayers))
-  .then(getRoomID)
-  .then(roomId => {
-    console.log('last-----', roomId);
-  });
-visitPage(url).then(login(username2));
-visitPage(url).then(login(username3));
+const loginUser = (user) => visitPage(url).then(login(user));
+
+const startGame = ([hostPage, ...joineePages]) => {
+  hostGame(hostPage, numOfPlayers)
+    .then(getRoomId)
+    .then(roomId => joineePages.map(joinGame(roomId)))
+};
+
+const main = () =>
+  Promise.all([user1, user2, user3].map(loginUser))
+    .then(startGame);
+
+main();
