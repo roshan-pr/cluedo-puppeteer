@@ -1,12 +1,14 @@
 const puppeteer = require('puppeteer');
 
 const delay = { delay: 10 };
+const size = { height: 1000, width: 1800 }
 
 const visitPage = (url) =>
   new Promise((res, rej) => {
     puppeteer.launch({ headless: false })
       .then(browser => browser.newPage())
       .then(page => page.goto(url)
+        .then(() => page.setViewport(size))
         .then(() => res(page)))
       .catch(error => rej(error));
   });
