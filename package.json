@@ -7,7 +7,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "game": "node simulateFor3.js"
+    "game": "node ."
   },
   "keywords": [],
   "author": "",
