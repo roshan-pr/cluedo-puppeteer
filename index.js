@@ -26,6 +26,7 @@ const main = ([option, numOfPlayers, ...inputs]) => {
   }
   else if (option === '-l') {
     ip = inputs[0] || '127.0.0.1'; // IP address
+    numOfPlayers = numOfPlayers || 3;
   }
   else {
     console.log('illigal option');
