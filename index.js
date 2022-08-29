@@ -32,7 +32,8 @@ const main = ([option, numOfPlayers, ...inputs]) => {
     console.log('illigal option');
     return;
   }
-  const url = `http://${ip}:8000`;
+
+  const url = ip.includes('heroku') ? `http://${ip}` : `http://${ip}:8000`;
   const players = ['Barnali', 'Prajakta', 'Chhavi', 'Prem', 'Sakshi', 'Azhar'].slice(0, numOfPlayers);
 
   Promise.all(players.map(player =>
